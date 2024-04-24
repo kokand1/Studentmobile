@@ -9,7 +9,7 @@ import 'package:lottie/lottie.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 void main() {
-  WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized(); //oxiri qo'shilga widget
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
     home: FutureBuilder<bool>(
