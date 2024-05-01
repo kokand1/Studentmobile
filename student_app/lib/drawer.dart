@@ -72,19 +72,31 @@ class _DrawerListState extends State<DrawerList> {
                   ),
                 ),
                 ListTile(
-            leading: CircleAvatar(child: Icon(Icons.play_lesson)),
-            title: Text('Darslarim'),
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context)=>MyLesson()));
-            },
-          ),
-          ListTile(
-            leading: CircleAvatar(child: Icon(Icons.account_balance_outlined)),
-            title: Text('Qarzlarim'),
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context)=>MyDebts()));
-            },
-          ),
+                  leading: CircleAvatar(child: Icon(Icons.play_lesson)),
+                  title: Text('Darslarim'),
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => MyLesson()));
+                  },
+                ),
+                ListTile(
+                  leading:
+                      CircleAvatar(child: Icon(Icons.account_balance_outlined)),
+                  title: Text('Qarzlarim'),
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => MyDebts()));
+                  },
+                ),
+                ListTile(
+                  leading:
+                      CircleAvatar(child: Icon(Icons.add_task_outlined)),
+                  title: Text("Bo'lim %"),
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => MyDebts()));
+                  },
+                ),
               ],
             ),
 

@@ -1,18 +1,18 @@
-
-
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_session_manager/flutter_session_manager.dart';
 import 'package:http/http.dart' as http;
+
 import 'package:student_app/my_lessons2.dart';
 
 String sectionname='';
 String datetimes ="";
-String roomid = "";
+String roomidroomname = "";
 String startdate = '';
 String enddate = "";
-String debt = "";
+String staffidfullname = "";
+String r = "";
+
  List nomlist = [];
 class MyLesson extends StatefulWidget {
   const MyLesson({Key? key}) : super(key: key);
@@ -24,7 +24,7 @@ class MyLesson extends StatefulWidget {
 class _MyLessonState extends State<MyLesson> {
  
  
-
+//darslar uchun 
   Future<void> fetchLessonData() async {
     try {
       dynamic apiget = await SessionManager().get("nomid");
@@ -40,19 +40,21 @@ class _MyLessonState extends State<MyLesson> {
         final List<dynamic> listnomi = jsonDecode(response.body);
 
         if (listnomi.isNotEmpty) {
-          for (var item in listnomi) {
+         
+          setState(() {
+            nomlist.clear();
+              for (var item in listnomi) {
             Map<String, dynamic> lessonData = Map<String, dynamic>.from(item);
      
             String bulim = lessonData['sectionid'];
             
             
             OddiyClass oddiy = OddiyClass(bulim:bulim);
-            setState(() {
-              nomlist.add(oddiy); // Add the object to the list
-            });
+           
+              nomlist.add(oddiy); 
+             // Add the object to the list
+            
           }
-          setState(() {
-            debt = "${listnomi.length}"; // Assuming 'debt' is a valid key in your response
           });
         }
       } else {
@@ -65,13 +67,14 @@ class _MyLessonState extends State<MyLesson> {
       // Handle other errors here
     }
   }
+//dars kunlari xona nomi 
   Future<void> fetchLessonData12(String aa) async {
     try {
       dynamic apiget = await SessionManager().get("nomid");
       
       final response = await http.get(Uri.parse(
-          "https://dash.univ.uz/api/17/179/6299?id=$aa"
-        
+          //section   https://dash.vips.uz/a/2/3/149
+        "https://dash.vips.uz/api/2/3/149?id=$aa"
           ));
       print(apiget);
 
@@ -85,17 +88,18 @@ class _MyLessonState extends State<MyLesson> {
             startdate = lessonData["startdate"];
             enddate = lessonData["enddate"];
             datetimes = lessonData["datetimes"];
-            roomid =lessonData["roomid"];
+            roomidroomname =lessonData["roomidroomname"];
+            staffidfullname = lessonData["staffidfullname"];
             
 
-            print(sectionname);
+            
            setState(() {
              Navigator.push(context, MaterialPageRoute(builder: (context)=> My_Lesson2()));
            });
            
           }
           setState(() {
-            debt = "${listnomi.length}"; // Assuming 'debt' is a valid key in your response
+            r = "${listnomi.length}"; // Assuming 'debt' is a valid key in your response
           });
         }
       } else {
@@ -108,7 +112,7 @@ class _MyLessonState extends State<MyLesson> {
       // Handle other errors here
     }
   }
-  
+
   Widget template (oddiy){
       return InkWell(
         onTap: () {
@@ -116,7 +120,7 @@ class _MyLessonState extends State<MyLesson> {
         },
         child: Container(
           decoration: BoxDecoration(
-            color: Colors.grey,
+           color: Color.fromARGB(255, 21, 187, 2),
             borderRadius: BorderRadius.all(Radius.circular(12))
           ),
           margin: EdgeInsets.all(10),
@@ -125,7 +129,7 @@ class _MyLessonState extends State<MyLesson> {
          
           
           child: ListTile(
-              title:  Text("sectionid: ${oddiy.bulim ?? 'bulim'}"),
+              title:  Text("Bo'limlarim: ${oddiy.bulim ?? 'bulim'}"),
               
               
             ),
